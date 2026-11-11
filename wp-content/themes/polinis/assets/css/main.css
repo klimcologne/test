@@ -452,12 +452,13 @@ button {
 }
 
 .switch--hero {
-	--sw-w: clamp(104px, 9.6vw, 148px);
-	--sw-gap: 8px;
+	--sw-w: clamp(200px, 21vw, 300px);
+	gap: 18px;
 }
 
 .switch--hero .switch__caption {
-	font-size: 0.9375rem;
+	font-size: clamp(1.5rem, 2.6vw, 2.5rem);
+	font-weight: 850;
 }
 
 .switch--mini {
@@ -811,31 +812,18 @@ button {
 }
 
 .hero__stage {
-	position: relative;
-	grid-column: 6 / -1;
+	grid-column: 7 / -1;
 	grid-row: 1;
 	align-self: center;
-	padding: 10px 10px 10px clamp(56px, 6vw, 96px);
+	justify-self: center;
+	display: grid;
+	justify-items: center;
+	gap: var(--s-4);
+	padding-bottom: var(--s-6);
 }
 
-.hero__screen .frame img {
-	width: 100%;
-	aspect-ratio: 730 / 495;
-	object-fit: cover;
-	background: var(--bg-2);
-}
-
-.hero__caption {
-	margin-top: 22px;
+.hero__hint {
 	color: var(--ink-2);
-	text-align: right;
-}
-
-.hero__switch {
-	position: absolute;
-	left: 0;
-	bottom: 4px;
-	z-index: 2;
 }
 
 .hero__data {
@@ -867,18 +855,8 @@ button {
 	.hero__stage {
 		grid-column: 1;
 		grid-row: 2;
-		padding: 10px;
-	}
-
-	.hero__caption {
-		margin-top: 22px;
-		padding-left: 100px;
-		text-align: left;
-	}
-
-	.hero__switch {
-		left: 18px;
-		bottom: -6px;
+		justify-self: center;
+		padding-bottom: 0;
 	}
 
 	.hero__data {
@@ -886,13 +864,12 @@ button {
 	}
 
 	.switch--hero {
-		--sw-w: 76px;
-		--sw-gap: 6px;
-		gap: 6px;
+		--sw-w: min(46vw, 210px);
+		gap: 12px;
 	}
 
 	.switch--hero .switch__caption {
-		font-size: 0.75rem;
+		font-size: 1.375rem;
 	}
 }
 
@@ -1156,12 +1133,18 @@ button {
 	color: var(--on-violet-2);
 }
 
+.manifesto__photo {
+	display: grid;
+	place-items: center;
+	padding: clamp(24px, 4vw, 64px);
+}
+
 .manifesto__photo img {
 	width: 100%;
-	height: 100%;
-	min-height: 420px;
+	max-width: 560px;
+	aspect-ratio: 1;
 	object-fit: cover;
-	object-position: 50% 25%;
+	mix-blend-mode: multiply;
 }
 
 @media (max-width: 900px) {
@@ -1283,10 +1266,17 @@ button {
 	padding: var(--s-8) var(--gutter);
 }
 
-.flip__art {
+.flip__pair {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--s-2);
+}
+
+.flip__pair img {
 	width: 100%;
-	aspect-ratio: 3 / 2;
+	aspect-ratio: 1;
 	object-fit: cover;
+	background: var(--tile);
 }
 
 .flip__copy {
@@ -2536,13 +2526,17 @@ select,
 }
 
 .series-row__media {
-	margin: 10px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--s-2);
 }
 
 .series-row__media img {
 	width: 100%;
-	aspect-ratio: 3 / 2;
+	aspect-ratio: 1;
 	object-fit: cover;
+	background: var(--tile);
+	mix-blend-mode: var(--tile-blend);
 }
 
 .series-row__body {

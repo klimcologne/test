@@ -19,8 +19,9 @@ get_header();
 		<?php foreach ( polinis_series() as $polinis_slug => $polinis_s ) : ?>
 			<?php if ( 'live' === $polinis_s['status'] ) : ?>
 				<article class="series-row" id="<?php echo esc_attr( $polinis_slug ); ?>">
-					<figure class="series-row__media frame">
-						<img src="<?php echo esc_url( $polinis_s['image'] ); ?>" alt="" width="760" height="515" loading="lazy">
+					<figure class="series-row__media">
+						<img src="<?php echo esc_url( polinis_series_photo( $polinis_slug, 0 ) ); ?>" alt="" width="1200" height="1200" loading="lazy">
+						<img src="<?php echo esc_url( polinis_series_photo( $polinis_slug, 1 ) ); ?>" alt="" width="1200" height="1200" loading="lazy">
 					</figure>
 					<div class="series-row__body">
 						<h2 class="next__name"><span class="next__code"><?php echo esc_html( $polinis_s['code'] ); ?></span> <?php echo esc_html( $polinis_s['name'] ); ?></h2>

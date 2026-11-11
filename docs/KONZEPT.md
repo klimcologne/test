@@ -4,7 +4,7 @@
 
 Polinis hat zwei Serien, die sich verhalten wie Ein und Aus – also bekommt der Shop einen Schalter: **OFF** ist die dunkle **S-01 „No Signal“**, **ON** die helle **S-02 „Light Series“**. Ein Klick, und der ganze Shop wechselt die Welt.
 
-Der Schalter ist kein Gimmick, den es irgendwo gibt. Er ist **das Motiv von den eigenen Hoodies** (der ON/OFF-Kippschalter mit „No Signal“). Die Marke hatte ihre Geschichte schon – sie stand nur auf den Rücken der Teile und nicht im Shop.
+Der Schalter ist kein Gimmick, den es irgendwo gibt. Er ist **das Motiv von den eigenen Hoodies** (der ON/OFF-Kippschalter mit „No Signal“). Die Marke hatte ihre Geschichte schon – sie stand nur auf den Rücken der Teile und nicht im Shop. Deshalb ist der Schalter auch das große Motiv auf der Startseite: Man kann ihn direkt umlegen.
 
 ## Was in den Drucken steckt (und jetzt im Shop sichtbar ist)
 

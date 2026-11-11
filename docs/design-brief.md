@@ -13,7 +13,7 @@ OWN-WORLD: OFF = violett getöntes Schwarz (#0d0c11), Text Off-White, Feldfarbe 
 
 STORY: Besucher sieht sofort Serie + Schalter, legt ihn um, versteht „zwei Welten, ein Label“, scrollt in die Serie, öffnet ein Teil.
 
-FIRST VIEWPORT: Links riesige Headline „No Signal.“ / „Light Series.“ (Archivo 125/800), darunter die Druckzeile und der Shop-Button. Rechts das Serien-Artwork vom Druck in einem Rahmen mit Eckmarken. Der große Schalter sitzt auf der Kante zwischen beiden. Koordinaten + MMXXVI als Datenzeile unten.
+FIRST VIEWPORT: Links riesige Headline „No Signal.“ / „Light Series.“ (Archivo 125/800), darunter die Druckzeile und der Shop-Button. Rechts der Schalter selbst als großes Motiv (Nachzeichnung des Drucks), darunter NO SIGNAL / SIGNAL. Koordinaten + MMXXVI als Datenzeile unten. Keine Figuren-Artworks.
 
 FORM: Eigene Ableitung (Launcher nicht verfügbar), Rang 1 von 7 Kandidaten. seed: none (unavailable)
 

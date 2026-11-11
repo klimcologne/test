@@ -16,8 +16,8 @@ function polinis_series() {
 			'name'   => 'No Signal',
 			'status' => 'live',
 			'motto'  => 'The world is loud. Stay true.',
-			'text'   => __( 'Der ON/OFF-Schalter, das Transmission-Artwork im Gewitter, das Kreis-Logo. Die dunkle Hälfte des Labels.', 'polinis' ),
-			'image'  => $img . 'art-s01.webp',
+			'text'   => __( 'Der ON/OFF-Schalter, das Transmission-Motiv, das Kreis-Logo. Die dunkle Hälfte des Labels.', 'polinis' ),
+			'image'  => '',
 			'world'  => 'off',
 		),
 		's-02'       => array(
@@ -26,7 +26,7 @@ function polinis_series() {
 			'status' => 'live',
 			'motto'  => 'Create your world. Wear your story.',
 			'text'   => __( 'Fadenkreuz, Wortmarke und die Light-Series-Collage. Die helle Hälfte.', 'polinis' ),
-			'image'  => $img . 'art-s02.webp',
+			'image'  => '',
 			'world'  => 'on',
 		),
 		's-03'       => array(
@@ -57,6 +57,17 @@ function polinis_series() {
 			'image'  => $img . 'series/s-05-homebase.webp',
 		),
 	);
+}
+
+/**
+ * Produktfoto aus einer Serie (n-tes Produkt nach Reihenfolge).
+ */
+function polinis_series_photo( $serie, $n = 0, $size = 'woocommerce_single' ) {
+	$products = polinis_series_products( $serie, $n + 1 );
+	if ( empty( $products[ $n ] ) ) {
+		return '';
+	}
+	return (string) wp_get_attachment_image_url( $products[ $n ]->get_image_id(), $size );
 }
 
 function polinis_series_concepts() {

@@ -13,7 +13,7 @@ get_header( 'shop' );
 $polinis_term  = is_product_taxonomy() ? get_queried_object() : null;
 $polinis_title = $polinis_term ? $polinis_term->name : __( 'Alle Teile', 'polinis' );
 $polinis_desc  = $polinis_term ? term_description( $polinis_term ) : '<p>' . esc_html__( 'Drei Linien, ein Label: S-01 No Signal, S-02 Light Series und die Essentials.', 'polinis' ) . '</p>';
-$polinis_art   = array( 's-01' => 'art-s01.webp', 's-02' => 'art-s02.webp' );
+$polinis_art   = array();
 $polinis_chips = array(
 	array( polinis_shop_url(), __( 'Alle', 'polinis' ), is_shop() ),
 	array( polinis_term_link( 's-01' ), 'S-01 No Signal', is_product_tag( 's-01' ) ),
