@@ -31,7 +31,8 @@ Das Violett ist aus den Drucken gemessen (S-02-Collage ≈ `#4818b8`) und für B
 
 ## Bausteine
 
-- **Schalter** (`.switch--hero`, `.switch--mini`): Kippschalter mit zwei Hälften; die gedrückte Hälfte liegt im Schatten und ist ausgegraut. `aria-pressed="true"` = ON.
+- **Schalter** (`.switch--hero`, `.switch--mini`): SVG-Nachzeichnung des S-01-Drucks, zwei Farben (`--sw-house`, `--sw-slot`), keine Schatten. OFF: obere Hälfte erhaben (schräge Kante, kursives ON), untere als schwarzes Feld. ON gespiegelt. In der hellen Welt invertiert. `aria-pressed="true"` = ON.
+- **Entwurf** (`.next__item`): geplante Serie mit Mockup, Etikett „Entwurf“, Code in Violett im Titel, Satz, Text, Basis.
 - **Rahmen** (`.frame`): Eckmarken 18px, 1px, 10px außerhalb – wie auf den Drucken.
 - **Buttons** (`.btn--primary`, `.btn--ghost`): eckig, 52–56px hoch, Großbuchstaben, Hover tauscht auf Textfarbe.
 - **Produktkarte** (`.card`): quadratisches Foto, Serien-Etikett oben links, beim Hover wischt der Rückendruck von unten ein (`clip-path`).
@@ -40,7 +41,7 @@ Das Violett ist aus den Drucken gemessen (S-02-Collage ≈ `#4818b8`) und für B
 
 ## Bewegung
 
-Ein Moment: Umschalten wächst als Kreis vom Schalter aus (View Transitions, 0,75s, Ease-out). Daneben nur ruhige Zustandswechsel (Kippen des Schalters, Wischen der Karten, Pfeile). `prefers-reduced-motion` schaltet alles ab, das Laufband steht dann still.
+Ein Moment: Umschalten wächst als Kreis vom Schalter aus (View Transitions, 0,75s, Ease-out). Der Schalter selbst rastet dabei kurz ein (0,22s). Daneben nur ruhige Zustandswechsel (Kippen des Schalters, Wischen der Karten, Pfeile). `prefers-reduced-motion` schaltet alles ab, das Laufband steht dann still.
 
 ## Raster
 

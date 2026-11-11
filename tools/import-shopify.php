@@ -27,6 +27,8 @@ $polinis_data  = json_decode( file_get_contents( $polinis_root . '/data/shopify-
 $polinis_map   = json_decode( file_get_contents( $polinis_root . '/data/product-map.json' ), true );
 $polinis_max   = (int) ( getenv( 'POLINIS_MAX_GALLERY' ) ?: 8 );
 $polinis_sizes = array( 'XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL' );
+// Farben: Schwarz und Weiß vorne, dann dunkel nach hell.
+$polinis_colors = array( 'Schwarz', 'Faded Black', 'Weiß', 'French Navy', 'Navy', 'Faded Coal', 'Dunkelgrau', 'Pine Green', 'Fichte', 'Kobalt', 'Faded Indigo', 'Kastanie', 'Clay', 'Cypress', 'Faded Grey', 'Athletisch Heather', 'Heather Grau', 'Silber', 'Sand', 'Faded Khaki', 'Desert Dust', 'Stein', 'Faded Bone', 'Faded Eucalyptus', 'Carolina-Blau', 'Lavendel', 'Cotton Pink', 'Fraiche Peche', 'White Heather', 'Natürlich/ Schwarz' );
 
 if ( ! $polinis_data || ! $polinis_map ) {
 	WP_CLI::error( 'Datendateien fehlen oder sind kein gültiges JSON.' );
@@ -207,7 +209,7 @@ foreach ( $polinis_data['products'] as $p ) {
 			list( $attr_id, $tax ) = $attrs[ $opt['name'] ];
 			$term_ids              = array();
 			foreach ( $opt['values'] as $v ) {
-				$order      = 'Größe' === $opt['name'] ? array_search( $v, $polinis_sizes, true ) : null;
+				$order      = array_search( $v, 'Größe' === $opt['name'] ? $polinis_sizes : $polinis_colors, true );
 				$term_ids[] = polinis_value_term( $v, $tax, false === $order ? 99 : $order )->term_id;
 			}
 			$a = new WC_Product_Attribute();

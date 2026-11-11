@@ -191,7 +191,6 @@ button {
 .label,
 .ticker,
 .manifesto__sign,
-.switch__caption,
 .site-footer__head,
 .woocommerce div.product form.cart .variations th label {
 	font-family: var(--f-text) !important;
@@ -376,81 +375,70 @@ button {
 }
 
 /* ---------- Der Schalter ---------- */
+/* Nachgezeichnet vom Druck auf den S-01-Teilen: zwei Farben, keine Schatten. */
 
 .switch {
+	--sw-house: #f4f3f7;
+	--sw-slot: var(--bg);
 	display: inline-flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 10px;
+	gap: 8px;
 	padding: 0;
 	border: 0;
 	background: none;
+	color: var(--ink);
 	cursor: pointer;
 	-webkit-tap-highlight-color: transparent;
 }
 
-.switch__plate {
+:root[data-signal="on"] .switch {
+	--sw-house: var(--ink);
+}
+
+.switch__body {
 	display: block;
-	padding: var(--pad);
-	border-radius: var(--r);
-	background: var(--switch-ink);
-	box-shadow: 0 14px 32px -12px rgb(0 0 0 / 0.55);
-	perspective: 420px;
+	width: var(--sw-w);
+	padding: var(--sw-gap, 0);
+	background: var(--bg);
 }
 
-.switch__rocker {
-	position: relative;
-	display: grid;
-	grid-template-rows: 1fr 1fr;
-	width: var(--w);
-	height: var(--h);
-	border-radius: calc(var(--r) - var(--pad));
-	background: var(--switch-plate);
-	color: var(--switch-ink);
-	transform-style: preserve-3d;
-	transform: rotateX(var(--tilt));
-	transition: transform 0.42s var(--ease-switch);
-	overflow: hidden;
+.switch__svg {
+	display: block;
+	width: 100%;
+	height: auto;
+	overflow: visible;
 }
 
-/* Die gedrückte Hälfte liegt im Schatten */
-.switch__rocker::after {
-	content: "";
-	position: absolute;
-	left: 0;
-	right: 0;
-	height: 50%;
-	top: var(--shade-top);
-	background: linear-gradient(to bottom, rgb(13 12 17 / 0.16), rgb(13 12 17 / 0.04));
-	transition: top 0.42s var(--ease-switch);
-}
-
-.switch__on,
-.switch__off {
-	position: relative;
-	z-index: 1;
-	display: grid;
-	place-items: center;
+.switch__svg text {
 	font-family: var(--f-text);
 	font-weight: 900;
 	font-stretch: 62%;
-	font-style: normal;
-	line-height: 1;
-	transform: skewX(-9deg);
-	transition: opacity 0.3s;
 }
 
-.switch__on {
-	border-bottom: 2px solid var(--switch-ink);
+:root[data-signal="off"] .switch__svg--on,
+:root[data-signal="on"] .switch__svg--off {
+	display: none;
+}
+
+/* Kurzes Einrasten beim Umlegen */
+.switch.is-flipping .switch__svg {
+	animation: polinis-snap 0.22s var(--ease-out);
+}
+
+@keyframes polinis-snap {
+	0% { transform: scaleY(0.9); }
+	60% { transform: scaleY(1.03); }
+	100% { transform: none; }
 }
 
 .switch__caption {
-	position: relative;
-	font-family: var(--f-mono);
-	font-weight: 500;
+	font-family: var(--f-text);
+	font-weight: 800;
+	font-stretch: 88%;
+	letter-spacing: 0.05em;
 	text-transform: uppercase;
-	letter-spacing: 0.12em;
-	color: var(--ink);
+	line-height: 1;
 	white-space: nowrap;
 }
 
@@ -459,76 +447,27 @@ button {
 	display: none;
 }
 
-/* OFF: untere Hälfte gedrückt. ON: obere. */
-:root[data-signal="off"] .switch {
-	--tilt: 10deg;
-	--shade-top: 50%;
-}
-
-:root[data-signal="on"] .switch {
-	--tilt: -10deg;
-	--shade-top: 0%;
-}
-
-:root[data-signal="off"] .switch__on,
-:root[data-signal="on"] .switch__off {
-	opacity: 0.38;
-}
-
-.switch:hover .switch__plate {
-	box-shadow: 0 18px 38px -12px rgb(81 36 214 / 0.55);
-}
-
-.switch:active .switch__rocker {
-	transition-duration: 0.15s;
-	transform: rotateX(0deg) scale(0.98);
+.switch:hover .switch__caption {
+	color: var(--link);
 }
 
 .switch--hero {
-	--w: clamp(104px, 9vw, 132px);
-	--h: clamp(150px, 13vw, 192px);
-	--pad: 10px;
-	--r: 20px;
-}
-
-.switch--hero .switch__on,
-.switch--hero .switch__off {
-	font-size: clamp(2.4rem, 3.6vw, 3.4rem);
+	--sw-w: clamp(104px, 9.6vw, 148px);
+	--sw-gap: 8px;
 }
 
 .switch--hero .switch__caption {
-	font-size: 0.8125rem;
+	font-size: 0.9375rem;
 }
 
 .switch--mini {
-	--w: 26px;
-	--h: 38px;
-	--pad: 3px;
-	--r: 7px;
+	--sw-w: 24px;
 	flex-direction: row;
 	gap: 10px;
 }
 
-.switch--mini .switch__plate {
-	box-shadow: none;
-}
-
-.switch--mini .switch__on,
-.switch--mini .switch__off {
-	font-size: 0.6875rem;
-	transform: skewX(-6deg);
-}
-
-.switch--mini .switch__on {
-	border-bottom-width: 1px;
-}
-
 .switch--mini .switch__caption {
-	font-size: 0.6875rem;
-}
-
-:root[data-signal="off"] .switch--mini .switch__plate {
-	background: var(--line-strong);
+	font-size: 0.75rem;
 }
 
 /* Umschalten: Kreis wächst vom Schalter aus */
@@ -947,20 +886,13 @@ button {
 	}
 
 	.switch--hero {
-		--w: 72px;
-		--h: 106px;
-		--pad: 7px;
-		--r: 14px;
+		--sw-w: 76px;
+		--sw-gap: 6px;
 		gap: 6px;
 	}
 
-	.switch--hero .switch__on,
-	.switch--hero .switch__off {
-		font-size: 1.85rem;
-	}
-
 	.switch--hero .switch__caption {
-		font-size: 0.6875rem;
+		font-size: 0.75rem;
 	}
 }
 
@@ -2470,6 +2402,168 @@ select,
 
 .wc-block-components-sidebar-layout {
 	color: var(--ink);
+}
+
+/* ---------- Nächste Serien (Entwürfe) ---------- */
+
+.next {
+	padding: var(--s-9) 0 var(--s-8);
+	border-top: 1px solid var(--line);
+}
+
+.next__list {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: var(--s-7) var(--s-5);
+	max-width: var(--maxw);
+	margin: 0 auto;
+	padding: 0 var(--gutter);
+}
+
+.next__item {
+	display: grid;
+	align-content: start;
+	gap: var(--s-4);
+}
+
+.next__media {
+	position: relative;
+	aspect-ratio: 1;
+	overflow: hidden;
+	background: var(--tile);
+}
+
+.next__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	mix-blend-mode: var(--tile-blend);
+	transition: transform 0.9s var(--ease-out);
+}
+
+.next__item:hover .next__media img {
+	transform: scale(1.04);
+}
+
+.next__tag {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	padding: 4px 8px;
+	border: 1px solid #0d0c11;
+	background: #f4f3f7;
+	color: #0d0c11;
+	font-family: var(--f-text);
+	font-size: 0.6875rem;
+	font-weight: 750;
+	font-stretch: 110%;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.next__body {
+	display: grid;
+	gap: var(--s-2);
+}
+
+.next__name {
+	font-size: clamp(1.75rem, 2.8vw, 2.5rem);
+	font-weight: 850;
+	font-stretch: 125%;
+	line-height: 0.95;
+	text-transform: uppercase;
+}
+
+.next__code {
+	color: var(--link);
+}
+
+.next__motto {
+	font-weight: 650;
+	font-stretch: 105%;
+}
+
+.next__text {
+	max-width: 46ch;
+	color: var(--ink-2);
+}
+
+.next__basis {
+	margin-top: var(--s-2);
+	padding-top: var(--s-3);
+	border-top: 1px solid var(--line);
+	color: var(--ink-2);
+	font-size: 0.875rem;
+}
+
+@media (max-width: 900px) {
+	.next__list {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.next__item {
+		grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+		column-gap: var(--s-5);
+		align-items: start;
+	}
+}
+
+@media (max-width: 560px) {
+	.next__item {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+/* ---------- Seite „Serien“ ---------- */
+
+.series-page {
+	display: block;
+}
+
+.series-list {
+	max-width: var(--maxw);
+	margin: 0 auto;
+	padding: 0 var(--gutter) var(--s-8);
+}
+
+.series-row {
+	display: grid;
+	grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+	align-items: center;
+	gap: var(--s-6) clamp(32px, 6vw, 96px);
+	padding: var(--s-7) 0;
+	border-top: 1px solid var(--line);
+}
+
+.series-row__media {
+	margin: 10px;
+}
+
+.series-row__media img {
+	width: 100%;
+	aspect-ratio: 3 / 2;
+	object-fit: cover;
+}
+
+.series-row__body {
+	display: grid;
+	justify-items: start;
+	gap: var(--s-3);
+}
+
+.series-row__meta {
+	color: var(--ink-2);
+	margin-bottom: var(--s-2);
+}
+
+.series-row--plain {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+@media (max-width: 900px) {
+	.series-row {
+		grid-template-columns: minmax(0, 1fr);
+	}
 }
 
 /* WordPress-Blockknöpfe (z. B. im leeren Warenkorb) im Polinis-Stil */

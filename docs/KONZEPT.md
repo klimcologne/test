@@ -19,6 +19,10 @@ Der Schalter ist kein Gimmick, den es irgendwo gibt. Er ist **das Motiv von den 
 | 50.8760° N · 6.5858° E | Koordinaten als wiederkehrendes Detail |
 | Lila Fadenkreuz, Eckmarken, Barcodes | Bildrahmen mit Eckmarken, Violett als Markenfarbe |
 
+## Der Schalter
+
+Der ON/OFF-Schalter im Shop ist eine Nachzeichnung des Drucks auf den S-01-Teilen: zwei Farben, harte Kanten, die erhabene Hälfte mit schräger Kante und kursiver Schrift, die gedrückte Hälfte als schwarzes Feld. Keine Schatten, kein Glühen, keine Rundungen. Er sieht aus wie ein Stück Grafik von der Kleidung, nicht wie ein App-Knopf. Beim Umlegen rastet er kurz ein, dann wechselt der ganze Shop.
+
 ## Drei Linien statt 31 Einzelprodukte
 
 Vorher: 31 Produkte mit langen Suchmaschinen-Titeln („Oversized Hoodie Herren Damen Unisex Baumwolle Streetwear Kapuzenpullover“). Kein Kunde merkt sich das.
@@ -46,6 +50,20 @@ Die alten SEO-Titel sind nicht weg: Sie stehen weiterhin im Seitentitel für Goo
 4. **Kategorien als große Liste** (Hoodies, T-Shirts, Sweatshirts, Caps, Polos & Jacken) statt Kachelraster.
 5. **Drop-Signal:** E-Mail-Liste für neue Drops mit Einwilligungs-Häkchen, im Admin unter *Werkzeuge → Drop-Signal* mit CSV-Export.
 6. **Pflicht-PDFs gerettet:** Pflegehinweise, GPSR-Sicherheitsinfos, Hersteller-Angaben und das Gewährleistungs-Label lagen bisher auf Shopify-Servern. Der Import holt sie in WordPress – sonst wären die Links nach der Shopify-Kündigung tot (Abmahnrisiko).
+
+## Nächste Serien (Entwürfe)
+
+Drei neue Serien im selben Vokabular – Signal, Sender, Koordinaten. Die Motive sind als druckfertige Vektorgrafik angelegt (`docs/serien/*.svg`), in zwei Farben wie beim Siebdruck. Im Shop stehen sie als „Entwurf“ unter *Nächste Signale* und auf der Seite *Serien*, ohne Preis und nicht bestellbar.
+
+| Serie | Satz | Motiv | Basis |
+|---|---|---|---|
+| **S-03 Static** | Between the stations. | Bildrauschen, das sich nach unten auflöst, quer ein violetter Abstimmbalken. Das Rauschen zwischen OFF und ON. | Relax Hoodie, Heavy Tee schwarz · Weiß + Violett |
+| **S-04 Frequency** | Find your frequency. | Eine Welle wie auf dem Oszilloskop, darunter eine Radioskala, die Nadel steht auf S-04. Das Signal kommt zurück. | Organic Crew, Hoodie schwarz · Weiß + Violett |
+| **S-05 Homebase** | Know where you stand. | Die Koordinaten vom S-01-Druck (50.8760° N · 6.5858° E) als Höhenlinien-Karte mit Fadenkreuz. | Heavy Tee Stein/Weiß, Dad Cap gestickt · Schwarz + Violett |
+
+Die Reihe erzählt weiter, was S-01 begonnen hat: **No Signal → Light → Static → Frequency → Homebase.** Bewusst grafischer und ruhiger als die Collagen von S-01/S-02 – das wirkt hochwertiger und lässt sich sauber drucken.
+
+Vor dem Druck: Texte in den SVGs in Pfade umwandeln (Illustrator/Inkscape), Schriften sind Archivo und JetBrains Mono (beide frei, OFL).
 
 ## Empfehlungen (nicht umgesetzt, Entscheidung beim Inhaber)
 

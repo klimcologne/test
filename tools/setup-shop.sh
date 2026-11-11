@@ -9,7 +9,7 @@
 #   1. WooCommerce installieren und auf Deutschland/Euro stellen
 #   2. Theme „Polinis ON/OFF“ verlinken und aktivieren
 #   3. Versandkostenfrei für Deutschland anlegen
-#   4. Seiten für Rechtstexte anlegen (leer – Texte aus dem alten Shop einfügen!)
+#   4. Seiten für Rechtstexte (leer – Texte aus dem alten Shop einfügen!) und die Serien-Übersicht anlegen
 #   5. Produkte aus dem bisherigen Shop importieren
 set -euo pipefail
 
@@ -61,6 +61,9 @@ for PAGE in "Impressum:impressum" "Datenschutz:datenschutz" "AGB:agb" "Widerrufs
 			--post_content="<p><strong>Platzhalter:</strong> Hier den Text „$TITLE“ aus dem bisherigen Shop einfügen.</p>"
 	fi
 done
+if [ -z "$($WP post list --post_type=page --name=serien --field=ID)" ]; then
+	$WP post create --post_type=page --post_status=publish --post_title="Serien" --post_name=serien
+fi
 $WP option update show_on_front posts
 
 echo "→ Produkte"

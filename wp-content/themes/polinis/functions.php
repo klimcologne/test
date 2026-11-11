@@ -13,6 +13,7 @@ require_once __DIR__ . '/inc/template-tags.php';
 require_once __DIR__ . '/inc/woocommerce.php';
 require_once __DIR__ . '/inc/newsletter.php';
 require_once __DIR__ . '/inc/customizer.php';
+require_once __DIR__ . '/inc/series.php';
 
 /* ---------- Setup ---------- */
 

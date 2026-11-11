@@ -17,6 +17,9 @@ Neubau von [polinis-onlineshop.de](https://polinis-onlineshop.de/) (bisher Shopi
 | `data/shopify-products.json` | Export der Produkte aus dem bisherigen Shop |
 | `data/product-map.json` | Neue Produktnamen, Serie und Kategorie je Produkt – hier Namen ändern und Import neu starten |
 | `docs/` | Konzept, Design-Brief, Screenshots |
+| `docs/serien/` | Druckfertige Motive der geplanten Serien S-03 bis S-05 (SVG) |
+| `tools/series.py`, `tools/mockup.py` | Erzeugen die Serien-Motive und legen sie als Mockup auf die Rohlinge |
+| `tools/export-preview.py` | Exportiert den Shop als statische Vorschau-Seite |
 | `DESIGN.md` | Farben, Schriften, Bausteine des Themes |
 
 ## Installation
@@ -46,7 +49,8 @@ Das Skript installiert WooCommerce, aktiviert das Theme, legt kostenlosen Versan
 
 - **Texte der Startseite, Laufband, Startzustand des Schalters:** *Design → Customizer → Polinis*
 - **Menüs:** *Design → Menüs* (Hauptmenü, Footer: Shop, Footer: Rechtliches). Ohne eigenes Menü baut das Theme die Navigation aus Serien und Kategorien.
-- **Neue Serie (z. B. S-03):** Produkt-Schlagwort `s-03` anlegen und Produkte zuordnen – die Serienseite entsteht automatisch. Für Startseite, Menü und eigene Welt (hell/dunkel) die Liste in `functions.php` und `front-page.php` ergänzen.
+- **Geplante Serien:** stehen in `inc/series.php` (Name, Satz, Text, Bild). Wenn S-03 startet: Status auf `live` setzen, Produkt-Schlagwort `s-03` anlegen, Produkte zuordnen.
+- **Neue Serie (z. B. S-06):** Produkt-Schlagwort `s-03` anlegen und Produkte zuordnen – die Serienseite entsteht automatisch. Für Startseite, Menü und eigene Welt (hell/dunkel) die Liste in `functions.php` und `front-page.php` ergänzen.
 - **Drop-Anmeldungen:** *Werkzeuge → Drop-Signal* (mit CSV-Export).
 
 ## Technik

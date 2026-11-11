@@ -27,6 +27,11 @@
 	function apply(state) {
 		root.dataset.signal = state;
 		syncSwitches();
+		document.querySelectorAll('[data-signal-toggle]').forEach(function (btn) {
+			btn.classList.remove('is-flipping');
+			void btn.offsetWidth;
+			btn.classList.add('is-flipping');
+		});
 	}
 
 	function setSignal(state, origin) {
@@ -63,7 +68,7 @@
 	document.addEventListener('click', function (e) {
 		var toggle = e.target.closest('[data-signal-toggle]');
 		if (toggle) {
-			setSignal(current() === 'on' ? 'off' : 'on', toggle.querySelector('.switch__plate') || toggle);
+			setSignal(current() === 'on' ? 'off' : 'on', toggle.querySelector('.switch__body') || toggle);
 			return;
 		}
 		var set = e.target.closest('[data-signal-set]');

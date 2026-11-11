@@ -125,6 +125,21 @@ $polinis_cats    = array( 'hoodies' => 'Hoodies', 't-shirts' => 'T-Shirts', 'swe
 		</div>
 	</section>
 
+	<section class="next" aria-labelledby="next-title">
+		<div class="section-head">
+			<h2 id="next-title" class="section-head__title"><?php esc_html_e( 'Nächste Signale', 'polinis' ); ?></h2>
+			<p class="section-head__text"><?php esc_html_e( 'Drei Serien in Arbeit. Noch nicht bestellbar: Trag dich unten ein, dann bekommst du das Signal zuerst.', 'polinis' ); ?></p>
+			<a class="link-arrow" href="<?php echo esc_url( polinis_series_page_url() ); ?>"><?php esc_html_e( 'Alle Serien', 'polinis' ); ?><?php echo polinis_icon( 'arrow' ); ?></a>
+		</div>
+		<div class="next__list">
+			<?php
+			foreach ( polinis_series_concepts() as $polinis_slug => $polinis_s ) {
+				polinis_concept_item( $polinis_slug, $polinis_s );
+			}
+			?>
+		</div>
+	</section>
+
 	<?php if ( $polinis_ess ) : ?>
 	<section class="essentials" aria-labelledby="ess-title">
 		<div class="section-head">

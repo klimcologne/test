@@ -13,7 +13,7 @@ def get(path):
     return urlopen(BASE + path, timeout=120).read().decode('utf-8')
 
 slugs = [l.split('\t')[1] for l in subprocess.run([S + '/wp', 'post', 'list', '--post_type=product', '--post_status=publish', '--fields=ID,post_name', '--posts_per_page=100'], capture_output=True, text=True).stdout.strip().split('\n')[1:]]
-pages = {'/': 'index.html', '/shop/': 'shop.html', '/shop/page/2/': 'shop-2.html'}
+pages = {'/': 'index.html', '/shop/': 'shop.html', '/shop/page/2/': 'shop-2.html', '/serien/': 'serien.html'}
 for t in ['s-01', 's-02', 'essentials']: pages[f'/product-tag/{t}/'] = f'serie-{t}.html'
 for c in ['hoodies', 't-shirts', 'sweatshirts', 'caps', 'polos-jacken']: pages[f'/product-category/{c}/'] = f'kat-{c}.html'
 for s_ in slugs: pages[f'/product/{s_}/'] = f'p-{s_}.html'
@@ -131,7 +131,10 @@ open(OUT + '/assets/main.css', 'w').write(css)
 shutil.copy(T + 'js/main.js', OUT + '/assets/main.js')
 for f in os.listdir(T + 'fonts'):
     if f.endswith('.woff2'): shutil.copy(T + 'fonts/' + f, OUT + '/assets/' + f)
-for f in os.listdir(T + 'img'): shutil.copy(T + 'img/' + f, OUT + '/assets/' + f)
+for f in os.listdir(T + 'img'):
+    src = T + 'img/' + f
+    if os.path.isdir(src): shutil.copytree(src, OUT + '/assets/' + f)
+    else: shutil.copy(src, OUT + '/assets/' + f)
 for name, src in images.items():
     im = Image.open(src).convert('RGB'); im.thumbnail((720, 900)); im.save(f'{OUT}/img/{name}', 'WEBP', quality=80)
 n = sum(len(fs) for _, _, fs in os.walk(OUT))

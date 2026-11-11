@@ -46,7 +46,7 @@ function polinis_logo( $class = '' ) {
 }
 
 /**
- * Der ON/OFF-Kippschalter – das Motiv von den S-01-Teilen.
+ * Der ON/OFF-Kippschalter – nachgezeichnet vom S-01-Druck: flach, zweifarbig, harte Kanten.
  *
  * @param string $size 'hero' oder 'mini'.
  */
@@ -54,13 +54,11 @@ function polinis_switch( $size = 'mini' ) {
 	ob_start();
 	?>
 	<button type="button" class="switch switch--<?php echo esc_attr( $size ); ?>" data-signal-toggle aria-pressed="false">
-		<span class="switch__plate" aria-hidden="true">
-			<span class="switch__rocker">
-				<span class="switch__on">ON</span>
-				<span class="switch__off">OFF</span>
-			</span>
+		<span class="switch__body">
+			<svg class="switch__svg switch__svg--off" viewBox="0 0 100 150" aria-hidden="true"><path fill="var(--sw-house)" d="M0 0H78L100 20L94 76V150H0Z"/><path fill="var(--sw-slot)" d="M5 4H21L26 22Z"/><path fill="var(--sw-slot)" d="M25.5 26H29.5L14.5 71H10.5Z"/><text x="56" y="62" font-size="35" text-anchor="middle" fill="var(--sw-slot)" transform="skewX(-12) translate(13 0)">ON</text><rect fill="var(--sw-slot)" x="8" y="83" width="79" height="60"/><text x="47.5" y="125" font-size="32" text-anchor="middle" fill="var(--sw-house)">OFF</text></svg>
+			<svg class="switch__svg switch__svg--on" viewBox="0 0 100 150" aria-hidden="true"><path fill="var(--sw-house)" d="M0 0H94V74L100 130L78 150H0Z"/><rect fill="var(--sw-slot)" x="8" y="7" width="79" height="60"/><text x="47.5" y="49" font-size="32" text-anchor="middle" fill="var(--sw-house)">ON</text><path fill="var(--sw-slot)" d="M5 146H21L26 128Z"/><path fill="var(--sw-slot)" d="M25.5 124H29.5L14.5 79H10.5Z"/><text x="56" y="126" font-size="35" text-anchor="middle" fill="var(--sw-slot)" transform="skewX(-12) translate(27 0)">OFF</text></svg>
 		</span>
-		<span class="switch__caption">
+		<span class="switch__caption" aria-hidden="true">
 			<span class="switch__state switch__state--off"><?php esc_html_e( 'No Signal', 'polinis' ); ?></span>
 			<span class="switch__state switch__state--on"><?php esc_html_e( 'Signal', 'polinis' ); ?></span>
 		</span>
@@ -118,7 +116,7 @@ function polinis_primary_nav() {
 	$items = array(
 		array( polinis_term_link( 's-01' ), 'S-01 No Signal' ),
 		array( polinis_term_link( 's-02' ), 'S-02 Light Series' ),
-		array( polinis_term_link( 'essentials' ), 'Essentials' ),
+		array( function_exists( 'polinis_series_page_url' ) ? polinis_series_page_url() : home_url( '/serien/' ), 'Alle Serien' ),
 		array( polinis_term_link( 'hoodies', 'product_cat' ), 'Hoodies' ),
 		array( polinis_term_link( 't-shirts', 'product_cat' ), 'T-Shirts' ),
 		array( polinis_term_link( 'sweatshirts', 'product_cat' ), 'Sweats' ),

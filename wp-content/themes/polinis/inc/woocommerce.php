@@ -26,6 +26,10 @@ add_filter(
 );
 
 add_filter( 'loop_shop_per_page', fn() => 24 );
+
+/* Variantendaten immer direkt mitliefern (Polinis-Produkte haben bis zu 48 Varianten).
+   So wechselt das Bild schon bei der Farbwahl, ohne auf die Größe zu warten. */
+add_filter( 'woocommerce_ajax_variation_threshold', fn() => 100 );
 add_filter( 'loop_shop_columns', fn() => 4 );
 
 /* ---------- Produktseite ---------- */
