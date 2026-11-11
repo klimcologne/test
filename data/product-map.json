@@ -1,0 +1,50 @@
+{
+  "_info": "Neue kurze Produktnamen, Serie und Kategorie je Shopify-Handle. Der alte SEO-Titel bleibt als Seitentitel für Google erhalten.",
+  "series": {
+    "s-01": { "name": "S-01 No Signal", "description": "Project S-01. Der ON/OFF-Schalter, das lila Transmission-Artwork, Kreis-Logo. Dunkel, laut, limitiert." },
+    "s-02": { "name": "S-02 Light Series", "description": "Project S-02. Fadenkreuz, Wortmarke und die Light-Series-Collage. Create your world. Wear your story." },
+    "essentials": { "name": "Essentials", "description": "Kleines Logo, schwere Stoffe, jeden Tag. Die Basis unter jedem Drop." }
+  },
+  "categories": {
+    "hoodies": "Hoodies",
+    "t-shirts": "T-Shirts",
+    "sweatshirts": "Sweatshirts",
+    "caps": "Caps",
+    "polos-jacken": "Polos & Jacken"
+  },
+  "products": {
+    "oversized-unisex-hoodie-3":   { "name": "No Signal Switch Hoodie", "serie": "s-01", "cat": "hoodies", "order": 1 },
+    "oversized-unisex-bio-t-shirt-mit-breitem-kragen-3": { "name": "No Signal Switch Tee", "serie": "s-01", "cat": "t-shirts", "order": 2 },
+    "unisex-bio-pullover-2":       { "name": "No Signal Switch Crew", "serie": "s-01", "cat": "sweatshirts", "order": 3 },
+    "oversized-unisex-hoodie-4":   { "name": "Project S-01 Hoodie", "serie": "s-01", "cat": "hoodies", "order": 4 },
+    "oversized-unisex-bio-t-shirt-mit-breitem-kragen-5": { "name": "Project S-01 Tee", "serie": "s-01", "cat": "t-shirts", "order": 5 },
+    "unisex-bio-pullover":         { "name": "Project S-01 Crew", "serie": "s-01", "cat": "sweatshirts", "order": 6 },
+    "oversized-unisex-hoodie-5":   { "name": "Transmission Hoodie", "serie": "s-01", "cat": "hoodies", "order": 7 },
+    "oversized-unisex-bio-t-shirt-mit-breitem-kragen-6": { "name": "Transmission Tee", "serie": "s-01", "cat": "t-shirts", "order": 8 },
+    "limited-unisex-sweatshirt-bio-baumwolle-herren-damen-premium-pullover": { "name": "Transmission Crew", "serie": "s-01", "cat": "sweatshirts", "order": 9 },
+    "premium-pique-poloshirt-1":   { "name": "Transmission Polo", "serie": "s-01", "cat": "polos-jacken", "order": 10 },
+    "dad-hat":                     { "name": "Circle Logo Dad Cap", "serie": "s-01", "cat": "caps", "order": 11 },
+
+    "oversized-t-shirt-mit-verwaschenem-look-2": { "name": "Light Series Washed Tee", "serie": "s-02", "cat": "t-shirts", "order": 1 },
+    "oversized-unisex-hoodie-10":  { "name": "Crosshair Hoodie", "serie": "s-02", "cat": "hoodies", "order": 2 },
+    "unisex-t-shirt-aus-bio-baumwolle-creator-2-0": { "name": "Crosshair Tee", "serie": "s-02", "cat": "t-shirts", "order": 3 },
+    "oversized-unisex-bio-t-shirt-mit-breitem-kragen": { "name": "Crosshair Heavy Tee", "serie": "s-02", "cat": "t-shirts", "order": 4 },
+    "oversized-unisex-hoodie-11":  { "name": "Crosshair Hoodie Night", "serie": "s-02", "cat": "hoodies", "order": 5 },
+    "oversized-t-shirt-mit-verwaschenem-look-3": { "name": "Light Series Washed Tee Night", "serie": "s-02", "cat": "t-shirts", "order": 6 },
+    "oversized-unisex-bio-t-shirt-mit-breitem-kragen-1": { "name": "Wordmark Heavy Tee", "serie": "s-02", "cat": "t-shirts", "order": 7 },
+    "snapback-cap":                { "name": "Wordmark Snapback", "serie": "s-02", "cat": "caps", "order": 8 },
+    "adidas-dad-hat":              { "name": "Wordmark Dad Hat × adidas", "serie": "s-02", "cat": "caps", "order": 9 },
+
+    "oversized-unisex-hoodie-1":   { "name": "Essential Hoodie", "serie": "essentials", "cat": "hoodies", "order": 1 },
+    "oversized-unisex-hoodie":     { "name": "Essential Hoodie Light", "serie": "essentials", "cat": "hoodies", "order": 2 },
+    "oversized-unisex-hoodie-2":   { "name": "Signature Hoodie", "serie": "essentials", "cat": "hoodies", "order": 3 },
+    "umweltfreundlicher-unisex-kapuzenpullover-1": { "name": "Organic Hoodie", "serie": "essentials", "cat": "hoodies", "order": 4 },
+    "umweltfreundlicher-unisex-kapuzenpullover": { "name": "Organic Hoodie Light", "serie": "essentials", "cat": "hoodies", "order": 5 },
+    "oversized-unisex-bio-pullover-1": { "name": "Organic Oversized Crew", "serie": "essentials", "cat": "sweatshirts", "order": 6 },
+    "unisex-bio-pullover-3":       { "name": "Organic Crew", "serie": "essentials", "cat": "sweatshirts", "order": 7 },
+    "unisex-bio-pullover-1":       { "name": "Organic Crew White", "serie": "essentials", "cat": "sweatshirts", "order": 8 },
+    "oversized-unisex-bio-t-shirt-mit-breitem-kragen-4": { "name": "Patch Heavy Tee", "serie": "essentials", "cat": "t-shirts", "order": 9 },
+    "adidas-premium-polo-shirt":   { "name": "Sport Polo × adidas", "serie": "essentials", "cat": "polos-jacken", "order": 10 },
+    "basic-unisex-windbreaker":    { "name": "Windbreaker", "serie": "essentials", "cat": "polos-jacken", "order": 11 }
+  }
+}
