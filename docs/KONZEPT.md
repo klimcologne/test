@@ -65,9 +65,20 @@ Die Reihe erzählt weiter, was S-01 begonnen hat: **No Signal → Light → Stat
 
 Vor dem Druck: Texte in den SVGs in Pfade umwandeln (Illustrator/Inkscape), Schriften sind Archivo und JetBrains Mono (beide frei, OFL).
 
+## Kaufen wie bei den großen Streetwear-Labels
+
+Abgeschaut bei der Mechanik gehypter Marken, nicht bei ihrem Aussehen:
+
+- **Drop-Leiste mit Countdown:** Unter dem Schalter steht der nächste Drop (Standard: S-03 Static). Ist im Customizer ein Datum eingetragen, läuft ein Countdown in Tagen, Stunden, Minuten, Sekunden. Ohne Datum steht dort „Datum folgt“ – mit „Erinnere mich“ zur Drop-Liste.
+- **Quick Add:** Beim Drüberfahren über ein Produkt erscheinen die Größen der Hauptfarbe. Ein Klick legt das Teil in den Warenkorb.
+- **Warenkorb als Seitenleiste:** Nach dem Hinzufügen fährt der Warenkorb von rechts rein, statt die Seite neu zu laden. Auch auf der Produktseite.
+- **Kaufleiste am Handy:** Auf der Produktseite bleibt unten eine Leiste mit Name, Preis und „Größe wählen“ / „In den Warenkorb“.
+- **Produktkarten im Hochformat** mit kleinen Großbuchstaben und engem Raster – ruhig, das Produkt steht im Mittelpunkt.
+
 ## Empfehlungen (nicht umgesetzt, Entscheidung beim Inhaber)
 
 - **Preise glätten:** 32,23 € oder 66,73 € wirken wie umgerechnet. Streetwear-üblich wären z. B. 34,90 € / 69,90 €.
 - **„Limited to 999“ ernst nehmen:** Steht auf S-01 und S-02. Wenn es stimmt, im Shop eine echte Stückzahl je Serie pflegen. Wenn nicht, vom Druck nehmen.
 - **Eigene Lifestyle-Fotos:** Zwei vorhandene Bilder sind KI-generiert. Für die Startseite wären 3–4 echte Fotos (Leute, Stadt, Nacht) ein großer Sprung.
-- **Drops terminieren:** Jede neue Serie als S-03, S-04 mit Datum ankündigen – der Shop ist dafür gebaut.
+- **Drops terminieren:** Jede neue Serie als S-03, S-04 mit Datum ankündigen – Datum im Customizer eintragen, der Countdown läuft dann automatisch.
+- **Eigene Kampagnenfotos:** Hype-Marken leben von echten Bildern (Leute, Straße, Nacht). Ein Shooting mit 10–15 Bildern pro Serie würde den Shop auf das nächste Level heben.

@@ -49,6 +49,24 @@
 	</div>
 </footer>
 
+<?php if ( function_exists( 'woocommerce_mini_cart' ) && WC()->cart ) : ?>
+<div class="drawer-scrim" data-drawer-close></div>
+<aside class="drawer" id="cart-drawer" aria-labelledby="drawer-title" inert data-drawer>
+	<header class="drawer__head">
+		<h2 class="drawer__title" id="drawer-title"><?php esc_html_e( 'Warenkorb', 'polinis' ); ?></h2>
+		<button class="icon-btn" type="button" data-drawer-close>
+			<?php echo polinis_icon( 'close' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+			<span class="screen-reader-text"><?php esc_html_e( 'Warenkorb schließen', 'polinis' ); ?></span>
+		</button>
+	</header>
+	<p class="drawer__added" data-drawer-added role="status"></p>
+	<div class="drawer__body">
+		<div class="widget_shopping_cart_content"><?php woocommerce_mini_cart(); ?></div>
+	</div>
+	<p class="drawer__note"><?php echo polinis_icon( 'truck' ); // phpcs:ignore ?><?php esc_html_e( 'Versandkostenfrei in Deutschland', 'polinis' ); ?></p>
+</aside>
+<?php endif; ?>
+
 <?php wp_footer(); ?>
 </body>
 </html>

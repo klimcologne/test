@@ -56,7 +56,7 @@ $polinis_ticker = array_filter( array_map( 'trim', explode( '—', polinis_mod( 
 					<?php echo polinis_icon( 'user' ); ?>
 					<span class="screen-reader-text"><?php esc_html_e( 'Mein Konto', 'polinis' ); ?></span>
 				</a>
-				<a class="icon-btn cart-link" href="<?php echo esc_url( wc_get_cart_url() ); ?>">
+				<a class="icon-btn cart-link" href="<?php echo esc_url( wc_get_cart_url() ); ?>" data-drawer-open aria-controls="cart-drawer">
 					<?php echo polinis_icon( 'bag' ); ?>
 					<?php echo polinis_cart_count_html(); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 					<span class="screen-reader-text"><?php esc_html_e( 'Warenkorb', 'polinis' ); ?></span>

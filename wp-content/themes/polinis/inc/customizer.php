@@ -15,6 +15,9 @@ function polinis_mod( $key ) {
 		'polinis_off_line'    => 'The world is loud. Stay true.',
 		'polinis_on_title'    => 'Light Series.',
 		'polinis_on_line'     => 'Create your world. Wear your story.',
+		'polinis_drop_name'   => 'S-03 Static',
+		'polinis_drop_date'   => '',
+		'polinis_drop_link'   => '',
 	);
 	return get_theme_mod( $key, $defaults[ $key ] ?? '' );
 }
@@ -42,6 +45,9 @@ add_action(
 			'polinis_on_title'    => 'ON: Headline',
 			'polinis_on_line'     => 'ON: Zeile darunter',
 			'polinis_coordinates' => 'Koordinaten',
+			'polinis_drop_name'   => 'Nächster Drop: Name (leer = Leiste aus)',
+			'polinis_drop_date'   => 'Nächster Drop: Datum + Uhrzeit, z. B. 2026-12-05 18:00 (leer = „Datum folgt“)',
+			'polinis_drop_link'   => 'Nächster Drop: Link (leer = Serien-Seite)',
 		);
 		foreach ( $fields as $key => $label ) {
 			$c->add_setting( $key, array( 'default' => polinis_mod( $key ), 'sanitize_callback' => 'sanitize_text_field' ) );

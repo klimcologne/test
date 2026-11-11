@@ -16,8 +16,11 @@ $hover_id = (int) get_post_meta( $product->get_id(), '_polinis_hover_image', tru
 $colors   = polinis_product_colors( $product );
 $sizes    = polinis_product_sizes_label( $product );
 $labels   = array( 's-01' => 'S-01', 's-02' => 'S-02', 'essentials' => 'ESS' );
+$quick    = polinis_quick_add_options( $product );
+$qcolor   = polinis_default_color_name( $product );
 ?>
 <article class="card<?php echo $hover_id ? ' card--has-alt' : ''; ?>">
+	<div class="card__visual">
 	<a class="card__media" href="<?php echo esc_url( $link ); ?>" tabindex="-1" aria-hidden="true">
 		<?php
 		echo wp_get_attachment_image( $product->get_image_id(), 'woocommerce_thumbnail', false, array( 'class' => 'card__img', 'loading' => 'lazy', 'sizes' => '(max-width: 700px) 70vw, 25vw' ) );
@@ -29,6 +32,17 @@ $labels   = array( 's-01' => 'S-01', 's-02' => 'S-02', 'essentials' => 'ESS' );
 			<span class="card__tag mono"><?php echo esc_html( $labels[ $serie->slug ] ?? $serie->name ); ?></span>
 		<?php endif; ?>
 	</a>
+	<?php if ( $quick ) : ?>
+		<div class="card__quick" role="group" aria-label="<?php echo esc_attr( sprintf( __( '%s schnell in den Warenkorb', 'polinis' ), $product->get_name() ) ); ?>">
+			<span class="card__quick-label"><?php echo esc_html( $qcolor ? sprintf( __( 'Quick Add · %s', 'polinis' ), $qcolor ) : __( 'Quick Add', 'polinis' ) ); ?></span>
+			<span class="card__quick-sizes">
+				<?php foreach ( $quick as $q ) : ?>
+					<button type="button" class="card__size" data-quick-add="<?php echo esc_attr( $q['id'] ); ?>" data-label="<?php echo esc_attr( $q['label'] ); ?>" data-price="<?php echo esc_attr( html_entity_decode( $q['price'] ) ); ?>"><?php echo esc_html( $q['label'] ); ?></button>
+				<?php endforeach; ?>
+			</span>
+		</div>
+	<?php endif; ?>
+	</div>
 	<div class="card__body">
 		<h3 class="card__title"><a href="<?php echo esc_url( $link ); ?>"><?php echo polinis_nobr( $product->get_name() ); // phpcs:ignore WordPress.Security.EscapeOutput ?></a></h3>
 		<p class="card__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></p>

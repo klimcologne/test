@@ -931,7 +931,7 @@ button {
 	display: grid;
 	grid-auto-flow: column;
 	grid-auto-columns: clamp(232px, 23vw, 340px);
-	gap: var(--s-4);
+	gap: 4px;
 	overflow-x: auto;
 	overscroll-behavior-x: contain;
 	scroll-snap-type: x mandatory;
@@ -975,10 +975,14 @@ button {
 	gap: var(--s-3);
 }
 
+.card__visual {
+	position: relative;
+}
+
 .card__media {
 	position: relative;
 	display: block;
-	aspect-ratio: 1;
+	aspect-ratio: 4 / 5;
 	overflow: hidden;
 	background: var(--tile);
 }
@@ -986,7 +990,7 @@ button {
 .card__img {
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
+	object-fit: contain;
 	mix-blend-mode: var(--tile-blend);
 	transition: transform 0.9s var(--ease-out);
 }
@@ -1031,11 +1035,12 @@ button {
 }
 
 .card__title {
-	font-size: 1rem;
-	font-weight: 700;
-	font-stretch: 108%;
-	line-height: 1.25;
-	letter-spacing: 0;
+	font-size: 0.8125rem;
+	font-weight: 750;
+	font-stretch: 112%;
+	line-height: 1.3;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
 }
 
 .card__title a {
@@ -1049,9 +1054,9 @@ button {
 }
 
 .card__price {
-	font-size: 0.9375rem;
+	font-size: 0.8125rem;
 	font-weight: 500;
-	color: var(--ink);
+	color: var(--ink-2);
 }
 
 .card__price del {
@@ -1316,7 +1321,7 @@ button {
 .woocommerce-page ul.products {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
-	gap: var(--s-7) var(--s-4);
+	gap: var(--s-6) 4px;
 	max-width: var(--maxw);
 	margin: 0 auto;
 	padding: 0 var(--gutter);
@@ -1349,11 +1354,15 @@ button {
 	.woocommerce ul.products,
 	.woocommerce-page ul.products {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: var(--s-6) var(--s-3);
+		gap: var(--s-5) 4px;
+	}
+
+	.card__body {
+		padding: 0 4px;
 	}
 
 	.card__title {
-		font-size: 0.9375rem;
+		font-size: 0.75rem;
 	}
 
 	.card__meta {
@@ -2557,6 +2566,465 @@ select,
 @media (max-width: 900px) {
 	.series-row {
 		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+/* ---------- Quick Add ---------- */
+
+.card__quick {
+	position: absolute;
+	left: 8px;
+	right: 8px;
+	bottom: 8px;
+	z-index: 2;
+	display: grid;
+	gap: 6px;
+	padding: 10px;
+	background: var(--bg);
+	border: 1px solid var(--line-strong);
+	opacity: 0;
+	transform: translateY(8px);
+	pointer-events: none;
+	transition: opacity 0.25s, transform 0.35s var(--ease-out);
+}
+
+.card__quick-label {
+	font-size: 0.6875rem;
+	font-weight: 750;
+	font-stretch: 110%;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--ink-2);
+}
+
+.card__quick-sizes {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+.card__size {
+	flex: 1 0 auto;
+	min-width: 38px;
+	height: 34px;
+	padding: 0 8px;
+	border: 1px solid var(--line-strong);
+	background: transparent;
+	color: var(--ink);
+	font-family: var(--f-mono);
+	font-size: 0.75rem;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.card__size:hover,
+.card__size:focus-visible {
+	background: var(--ink);
+	border-color: var(--ink);
+	color: var(--bg);
+}
+
+.card__size.is-loading,
+.single_add_to_cart_button.is-loading {
+	opacity: 0.6;
+	cursor: progress;
+}
+
+@media (hover: hover) {
+	.card:hover .card__quick,
+	.card:focus-within .card__quick {
+		opacity: 1;
+		transform: none;
+		pointer-events: auto;
+	}
+}
+
+@media (hover: none) {
+	.card__quick {
+		display: none;
+	}
+}
+
+/* ---------- Drop-Leiste ---------- */
+
+.drop {
+	background: var(--ink);
+	color: var(--bg);
+}
+
+.drop__inner {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	align-items: center;
+	gap: var(--s-4) clamp(24px, 4vw, 64px);
+	max-width: var(--maxw);
+	margin: 0 auto;
+	padding: var(--s-5) var(--gutter);
+}
+
+.drop__what {
+	display: grid;
+	gap: 2px;
+}
+
+.drop__label {
+	font-size: 0.75rem;
+	font-weight: 750;
+	font-stretch: 110%;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	opacity: 0.72;
+}
+
+.drop__name {
+	font-size: clamp(1.5rem, 3vw, 2.25rem);
+	font-weight: 850;
+	font-stretch: 125%;
+	line-height: 1;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.drop__name:hover {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+}
+
+.drop__clock {
+	display: flex;
+	justify-content: center;
+	gap: clamp(12px, 2.4vw, 32px);
+	font-variant-numeric: tabular-nums;
+}
+
+.drop__clock span {
+	display: grid;
+	justify-items: center;
+}
+
+.drop__clock b {
+	font-size: clamp(2rem, 4.6vw, 3.75rem);
+	font-weight: 850;
+	font-stretch: 125%;
+	line-height: 1;
+}
+
+.drop__clock small {
+	font-size: 0.6875rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	opacity: 0.72;
+}
+
+.drop__clock--tbd {
+	font-size: clamp(1.5rem, 3.4vw, 2.75rem);
+	font-weight: 850;
+	font-stretch: 125%;
+	text-transform: uppercase;
+	opacity: 0.88;
+}
+
+.drop .btn--primary:hover {
+	background: var(--bg);
+	color: var(--ink);
+}
+
+@media (max-width: 760px) {
+	.drop__inner {
+		grid-template-columns: minmax(0, 1fr);
+		justify-items: start;
+	}
+
+	.drop__clock {
+		justify-content: flex-start;
+	}
+}
+
+/* ---------- Warenkorb-Leiste ---------- */
+
+.drawer-scrim {
+	position: fixed;
+	inset: 0;
+	z-index: 80;
+	background: rgb(9 8 12 / 0.55);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.3s, visibility 0s 0.3s;
+}
+
+.drawer {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 81;
+	display: grid;
+	grid-template-rows: auto auto 1fr auto;
+	width: min(440px, 100vw);
+	padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) 0;
+	background: var(--bg);
+	color: var(--ink);
+	border-left: 1px solid var(--line-strong);
+	transform: translateX(100%);
+	visibility: hidden;
+	transition: transform 0.45s var(--ease-out), visibility 0s 0.45s;
+	outline: none;
+}
+
+.drawer-open .drawer {
+	transform: none;
+	visibility: visible;
+	transition: transform 0.45s var(--ease-out);
+}
+
+.drawer-open .drawer-scrim {
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 0.3s;
+}
+
+.drawer-open body {
+	overflow: hidden;
+}
+
+.drawer__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--s-4) var(--s-5);
+	border-bottom: 1px solid var(--line);
+}
+
+.drawer__title {
+	font-size: 1.5rem;
+	font-weight: 850;
+	font-stretch: 125%;
+	text-transform: uppercase;
+}
+
+.drawer__added {
+	padding: 0 var(--s-5);
+	font-weight: 650;
+	color: var(--link);
+}
+
+.drawer__added:not(:empty) {
+	padding-block: var(--s-3);
+	border-bottom: 1px solid var(--line);
+}
+
+.drawer__body {
+	overflow-y: auto;
+	padding: var(--s-4) var(--s-5);
+}
+
+.drawer__note {
+	display: flex;
+	align-items: center;
+	gap: var(--s-2);
+	padding: var(--s-4) var(--s-5);
+	border-top: 1px solid var(--line);
+	color: var(--ink-2);
+	font-size: 0.875rem;
+}
+
+.drawer__note .icon {
+	width: 18px;
+	height: 18px;
+	color: var(--link);
+}
+
+.woocommerce-mini-cart {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.drawer .woocommerce-mini-cart-item {
+	text-align: left;
+	margin: 0;
+	position: relative;
+	display: grid;
+	grid-template-columns: 76px minmax(0, 1fr);
+	column-gap: var(--s-4);
+	padding: var(--s-3) 28px var(--s-3) 0;
+	border-bottom: 1px solid var(--line);
+	font-size: 0.875rem;
+}
+
+.drawer .woocommerce-mini-cart .woocommerce-mini-cart-item > a:not(.remove) {
+	display: contents;
+	color: var(--ink);
+	font-weight: 750;
+	font-stretch: 110%;
+	text-transform: uppercase;
+	font-size: 0.8125rem;
+	text-decoration: none;
+}
+
+.drawer .woocommerce-mini-cart .woocommerce-mini-cart-item img {
+	grid-column: 1;
+	grid-row: 1 / span 3;
+	width: 76px !important;
+	height: 95px !important;
+	object-fit: contain;
+	background: var(--tile);
+	mix-blend-mode: var(--tile-blend);
+	float: none !important;
+	margin: 0 !important;
+}
+
+.drawer .woocommerce-mini-cart-item a.remove {
+	position: absolute;
+	top: var(--s-3);
+	right: 0;
+	color: var(--ink-2) !important;
+	font-size: 1.25rem;
+	text-decoration: none;
+}
+
+.drawer .woocommerce-mini-cart-item a.remove:hover {
+	background: none !important;
+	color: var(--link) !important;
+}
+
+.drawer .woocommerce-mini-cart-item dl.variation,
+.drawer .woocommerce-mini-cart-item .quantity {
+	grid-column: 2;
+}
+
+.woocommerce-mini-cart-item dl.variation {
+	margin: 2px 0;
+	color: var(--ink-2);
+	font-size: 0.8125rem;
+}
+
+.woocommerce-mini-cart-item dl.variation dt,
+.woocommerce-mini-cart-item dl.variation dd,
+.woocommerce-mini-cart-item dl.variation p {
+	display: inline;
+	margin: 0;
+}
+
+.woocommerce-mini-cart-item .quantity {
+	color: var(--ink-2);
+	font-family: var(--f-mono);
+	font-size: 0.75rem;
+}
+
+.woocommerce-mini-cart__total {
+	display: flex;
+	justify-content: space-between;
+	margin: var(--s-4) 0 !important;
+	padding: 0 !important;
+	border: 0 !important;
+	font-weight: 750;
+}
+
+.woocommerce-mini-cart__buttons {
+	display: grid;
+	gap: var(--s-2);
+	margin: 0;
+}
+
+.drawer .woocommerce-mini-cart__buttons .button {
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	min-height: 52px !important;
+	margin: 0 !important;
+	padding: 0 24px !important;
+	border: 1px solid var(--violet) !important;
+	border-radius: 0 !important;
+	background: var(--violet) !important;
+	color: var(--on-violet) !important;
+	font-family: var(--f-text) !important;
+	font-size: 0.875rem !important;
+	font-weight: 750 !important;
+	font-stretch: 112%;
+	letter-spacing: 0.06em;
+	text-align: center;
+	text-decoration: none !important;
+	text-transform: uppercase;
+}
+
+.drawer .woocommerce-mini-cart__buttons .button:hover {
+	background: var(--ink) !important;
+	border-color: var(--ink) !important;
+	color: var(--bg) !important;
+}
+
+.drawer .woocommerce-mini-cart__buttons .button:not(.checkout) {
+	background: transparent !important;
+	border: 1px solid var(--line-strong) !important;
+	color: var(--ink) !important;
+}
+
+.woocommerce-mini-cart__empty-message {
+	padding: var(--s-6) 0;
+	color: var(--ink-2);
+	text-align: center;
+}
+
+/* ---------- Kaufleiste am Handy ---------- */
+
+.buybar {
+	display: none;
+}
+
+@media (max-width: 900px) {
+	.buybar {
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 40;
+		display: flex;
+		align-items: center;
+		gap: var(--s-3);
+		padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+		background: var(--bg);
+		border-top: 1px solid var(--line-strong);
+		transform: translateY(110%);
+		transition: transform 0.35s var(--ease-out);
+	}
+
+	.buybar.is-visible {
+		transform: none;
+	}
+
+	.buybar__info {
+		display: grid;
+		flex: 1;
+		min-width: 0;
+	}
+
+	.buybar__name {
+		overflow: hidden;
+		font-size: 0.75rem;
+		font-weight: 750;
+		font-stretch: 110%;
+		letter-spacing: 0.04em;
+		text-overflow: ellipsis;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	.buybar__price {
+		font-size: 0.875rem;
+		color: var(--ink-2);
+	}
+
+	.buybar__btn {
+		flex: none;
+		min-height: 48px;
+		padding: 0 18px;
+	}
+
+	.single-product .site-footer__base {
+		padding-bottom: 96px;
 	}
 }
 

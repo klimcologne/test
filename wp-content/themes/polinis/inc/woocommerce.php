@@ -69,6 +69,26 @@ function polinis_single_promises() {
 	<?php
 }
 
+/* Feste Kaufleiste am Handy, erscheint wenn der Kaufen-Knopf aus dem Bild scrollt. */
+add_action(
+	'woocommerce_after_single_product',
+	function () {
+		global $product;
+		if ( ! $product || ! $product->is_purchasable() ) {
+			return;
+		}
+		?>
+		<div class="buybar" data-buybar aria-hidden="true">
+			<div class="buybar__info">
+				<span class="buybar__name"><?php echo esc_html( $product->get_name() ); ?></span>
+				<span class="buybar__price" data-buybar-price><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
+			</div>
+			<button type="button" class="btn btn--primary buybar__btn" data-buybar-btn tabindex="-1"><?php esc_html_e( 'Größe wählen', 'polinis' ); ?></button>
+		</div>
+		<?php
+	}
+);
+
 add_filter( 'woocommerce_product_related_products_heading', fn() => __( 'Passt dazu', 'polinis' ) );
 add_filter(
 	'woocommerce_output_related_products_args',
@@ -145,6 +165,55 @@ function polinis_payment_labels() {
 		}
 	}
 	return array_values( array_unique( $labels ) );
+}
+
+/* ---------- Quick Add: Größen der Hauptfarbe direkt auf der Karte ---------- */
+
+function polinis_quick_add_options( $product ) {
+	if ( $product->is_type( 'simple' ) ) {
+		return $product->is_purchasable() && $product->is_in_stock()
+			? array( array( 'label' => __( 'In den Warenkorb', 'polinis' ), 'id' => $product->get_id(), 'price' => wp_strip_all_tags( wc_price( wc_get_price_to_display( $product ) ) ) ) )
+			: array();
+	}
+	if ( ! $product->is_type( 'variable' ) ) {
+		return array();
+	}
+	$defaults = $product->get_default_attributes();
+	$color    = $defaults['pa_farbe'] ?? '';
+	$order    = array( 'XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL' );
+	$options  = array();
+	foreach ( $product->get_children() as $child_id ) {
+		$v = wc_get_product( $child_id );
+		if ( ! $v || ! $v->is_purchasable() || ! $v->is_in_stock() ) {
+			continue;
+		}
+		$attrs = $v->get_attributes();
+		if ( $color && isset( $attrs['pa_farbe'] ) && $attrs['pa_farbe'] !== $color ) {
+			continue;
+		}
+		$size_slug = $attrs['pa_groesse'] ?? '';
+		$term      = $size_slug ? get_term_by( 'slug', $size_slug, 'pa_groesse' ) : null;
+		$label     = $term ? $term->name : __( 'In den Warenkorb', 'polinis' );
+		$options[ $label ] = array( 'label' => $label, 'id' => $child_id, 'price' => wp_strip_all_tags( wc_price( wc_get_price_to_display( $v ) ) ) );
+	}
+	uksort(
+		$options,
+		function ( $a, $b ) use ( $order ) {
+			$ia = array_search( $a, $order, true );
+			$ib = array_search( $b, $order, true );
+			return ( false === $ia ? 99 : $ia ) <=> ( false === $ib ? 99 : $ib );
+		}
+	);
+	return array_values( $options );
+}
+
+function polinis_default_color_name( $product ) {
+	$defaults = $product->is_type( 'variable' ) ? $product->get_default_attributes() : array();
+	if ( empty( $defaults['pa_farbe'] ) ) {
+		return '';
+	}
+	$term = get_term_by( 'slug', $defaults['pa_farbe'], 'pa_farbe' );
+	return $term ? $term->name : '';
 }
 
 /* ---------- Helfer für Karten ---------- */

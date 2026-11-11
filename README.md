@@ -47,7 +47,7 @@ Das Skript installiert WooCommerce, aktiviert das Theme, legt kostenlosen Versan
 
 ## Anpassen
 
-- **Texte der Startseite, Laufband, Startzustand des Schalters:** *Design → Customizer → Polinis*
+- **Texte der Startseite, Laufband, Startzustand des Schalters, nächster Drop mit Countdown:** *Design → Customizer → Polinis* (Datum im Format `2026-12-05 18:00`, leer = „Datum folgt“, Name leer = Leiste aus)
 - **Menüs:** *Design → Menüs* (Hauptmenü, Footer: Shop, Footer: Rechtliches). Ohne eigenes Menü baut das Theme die Navigation aus Serien und Kategorien.
 - **Geplante Serien:** stehen in `inc/series.php` (Name, Satz, Text, Bild). Wenn S-03 startet: Status auf `live` setzen, Produkt-Schlagwort `s-03` anlegen, Produkte zuordnen.
 - **Neue Serie (z. B. S-06):** Produkt-Schlagwort `s-03` anlegen und Produkte zuordnen – die Serienseite entsteht automatisch. Für Startseite, Menü und eigene Welt (hell/dunkel) die Liste in `functions.php` und `front-page.php` ergänzen.

@@ -44,7 +44,7 @@ def css_ref(url):
     return '#'
 
 EXTRA = '''
-<div class="preview-note" role="note"><strong>Konzept-Vorschau</strong> · So könnte der neue Polinis-Shop aussehen. Bestellen ist hier nicht möglich.</div>
+<div class="preview-note" role="note"><strong>Konzept-Vorschau</strong> · So könnte der neue Polinis-Shop aussehen. Der Warenkorb ist simuliert, bestellen ist hier nicht möglich.</div>
 <div class="preview-toast" hidden data-preview-toast></div>
 <style>
 .preview-note{position:relative;z-index:60;padding:8px max(16px,env(safe-area-inset-left,0px));background:#efedf4;color:#0d0c11;font:500 12px/1.4 "Archivo",Arial,sans-serif;text-align:center}
@@ -52,15 +52,57 @@ EXTRA = '''
 </style>
 <script>
 (function(){
-  var t=document.querySelector('[data-preview-toast]'),h;
+  var t=document.querySelector('[data-preview-toast]'),h,KEY='polinis-preview-cart';
   function toast(m){t.textContent=m;t.hidden=false;clearTimeout(h);h=setTimeout(function(){t.hidden=true},3200);}
-  document.addEventListener('submit',function(e){e.preventDefault();
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
+  function save(c){try{localStorage.setItem(KEY,JSON.stringify(c))}catch(e){}}
+  function euro(n){return n.toFixed(2).replace('.',',')+' €'}
+  function num(s){var m=(s||'').replace(/\./g,'').match(/(\d+),(\d{2})/);return m?parseFloat(m[1]+'.'+m[2]):0}
+  function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+  function render(){
+    var c=load(),box=document.querySelector('.widget_shopping_cart_content'),n=0,sum=0;
+    c.forEach(function(i){n+=i.qty;sum+=i.qty*i.price;});
+    document.querySelectorAll('.cart-count').forEach(function(el){el.textContent=n;el.setAttribute('data-count',n);});
+    if(!box) return;
+    if(!c.length){box.innerHTML='<p class="woocommerce-mini-cart__empty-message">Dein Warenkorb ist leer.</p>';return;}
+    box.innerHTML='<ul class="woocommerce-mini-cart cart_list product_list_widget">'+c.map(function(i,k){
+      return '<li class="woocommerce-mini-cart-item mini_cart_item"><a href="#" class="remove" data-preview-remove="'+k+'" aria-label="Entfernen">×</a><a href="'+esc(i.url)+'"><img src="'+esc(i.img)+'" alt="">'+esc(i.name)+'</a><span class="quantity">'+i.qty+' × '+euro(i.price)+'</span></li>';
+    }).join('')+'</ul><p class="woocommerce-mini-cart__total total"><strong>Zwischensumme:</strong> <span>'+euro(sum)+'</span></p><p class="woocommerce-mini-cart__buttons buttons"><a href="#" class="button" data-preview-msg="Der Warenkorb ist in der Vorschau simuliert.">Warenkorb anzeigen</a><a href="#" class="button checkout" data-preview-msg="Bestellen ist in der Vorschau nicht möglich.">Kasse</a></p>';
+  }
+  function openDrawer(msg){
+    var d=document.querySelector('[data-drawer]');if(!d)return;
+    var a=document.querySelector('[data-drawer-added]');if(a)a.textContent=msg||'';
+    document.documentElement.classList.add('drawer-open');d.removeAttribute('inert');
+  }
+  function add(item,msg){var c=load(),f=c.find(function(i){return i.name===item.name;});if(f)f.qty+=item.qty;else c.push(item);save(c);render();openDrawer(msg);}
+  document.addEventListener('click',function(e){
+    var q=e.target.closest('[data-quick-add]');
+    if(q){e.preventDefault();e.stopImmediatePropagation();
+      var card=q.closest('.card'),title=card.querySelector('.card__title').textContent.trim(),lab=q.getAttribute('data-label'),img=card.querySelector('.card__img');
+      var col=(card.querySelector('.card__quick-label')||{}).textContent||'';col=col.split('·')[1]||'';
+      var name=title+(col.trim()?' - '+col.trim():'')+(lab&&lab!=='In den Warenkorb'?', '+lab:'');
+      add({name:name,qty:1,price:num(q.getAttribute('data-price')),img:img?img.getAttribute('src'):'',url:card.querySelector('.card__title a').getAttribute('href')},title+' · '+lab+' ist im Warenkorb.');return;}
+    var r=e.target.closest('[data-preview-remove]');
+    if(r){e.preventDefault();e.stopImmediatePropagation();var c=load();c.splice(+r.getAttribute('data-preview-remove'),1);save(c);render();return;}
+    var m=e.target.closest('[data-preview-msg]');
+    if(m){e.preventDefault();e.stopImmediatePropagation();toast(m.getAttribute('data-preview-msg'));return;}
+    var a=e.target.closest('a[href="#"]');if(a&&!a.closest('[data-drawer]')){e.preventDefault();toast('Diese Seite gibt es in der Vorschau nicht.');}
+  },true);
+  document.addEventListener('submit',function(e){e.preventDefault();e.stopImmediatePropagation();
     var f=e.target;
-    if(f.classList.contains('cart')) toast('Im echten Shop liegt das Teil jetzt im Warenkorb.');
+    if(f.classList.contains('cart')){
+      var sels=[].slice.call(f.querySelectorAll('.variations select'));
+      if(sels.some(function(s){return !s.value;})){toast('Bitte erst Farbe und Größe wählen.');return;}
+      var picked=sels.map(function(s){return s.options[s.selectedIndex].text;}).join(', ');
+      var title=(document.querySelector('.product_title')||{}).textContent||'';
+      var pr=f.querySelector('.preview-price .amount, .preview-price')||document.querySelector('.summary .price');
+      var qty=parseInt((f.querySelector('input.qty')||{}).value||'1',10)||1;
+      var img=document.querySelector('.pdp-gallery .wp-post-image');
+      add({name:title.trim()+(picked?' - '+picked:''),qty:qty,price:num(pr?pr.textContent:''),img:img?img.getAttribute('src'):'',url:location.pathname.split('/').pop()},title.trim()+(picked?' · '+picked:'')+' ist im Warenkorb.');
+    }
     else if(f.classList.contains('signup__form')) toast('Im echten Shop wärst du jetzt für das Drop-Signal eingetragen.');
     else toast('In der Vorschau nicht verfügbar.');
   },true);
-  document.addEventListener('click',function(e){var a=e.target.closest('a[href="#"]');if(a){e.preventDefault();toast('Diese Seite gibt es in der Vorschau nicht.');}});
   function syncBtn(){document.querySelectorAll('form.variations_form').forEach(function(f){
     var ok=[].every.call(f.querySelectorAll('.variations select'),function(s){return s.value;});
     var b=f.querySelector('.single_add_to_cart_button'); if(!b) return;
@@ -74,7 +116,7 @@ EXTRA = '''
   });}
   document.querySelectorAll('form.variations_form .single_variation_wrap').forEach(function(w){var d=document.createElement('div');d.className='preview-price woocommerce-variation-price';w.prepend(d);});
   document.addEventListener('change',function(e){if(e.target.closest('.variations')) setTimeout(syncBtn,0);});
-  syncBtn();
+  document.addEventListener('DOMContentLoaded',function(){render();syncBtn();});
 })();
 </script>
 '''

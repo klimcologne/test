@@ -47,6 +47,34 @@ $polinis_cats    = array( 'hoodies' => 'Hoodies', 't-shirts' => 'T-Shirts', 'swe
 		</p>
 	</section>
 
+	<?php
+	$polinis_drop_name = polinis_mod( 'polinis_drop_name' );
+	$polinis_drop_date = polinis_mod( 'polinis_drop_date' );
+	$polinis_drop_ts   = $polinis_drop_date ? strtotime( get_gmt_from_date( $polinis_drop_date ) . ' UTC' ) : 0;
+	$polinis_drop_link = polinis_mod( 'polinis_drop_link' ) ?: polinis_series_page_url() . '#s-03';
+	if ( $polinis_drop_name ) :
+		?>
+	<section class="drop" aria-label="<?php esc_attr_e( 'Nächster Drop', 'polinis' ); ?>">
+		<div class="drop__inner">
+			<p class="drop__what">
+				<span class="drop__label"><?php esc_html_e( 'Nächster Drop', 'polinis' ); ?></span>
+				<a class="drop__name" href="<?php echo esc_url( $polinis_drop_link ); ?>"><?php echo polinis_nobr( $polinis_drop_name ); // phpcs:ignore ?></a>
+			</p>
+			<?php if ( $polinis_drop_ts > time() ) : ?>
+				<p class="drop__clock" data-countdown="<?php echo esc_attr( $polinis_drop_ts ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Drop am %s', 'polinis' ), wp_date( 'j. F Y, H:i', $polinis_drop_ts ) ) ); ?>">
+					<span><b data-cd="d">00</b><small><?php esc_html_e( 'Tage', 'polinis' ); ?></small></span>
+					<span><b data-cd="h">00</b><small><?php esc_html_e( 'Std', 'polinis' ); ?></small></span>
+					<span><b data-cd="m">00</b><small><?php esc_html_e( 'Min', 'polinis' ); ?></small></span>
+					<span><b data-cd="s">00</b><small><?php esc_html_e( 'Sek', 'polinis' ); ?></small></span>
+				</p>
+			<?php else : ?>
+				<p class="drop__clock drop__clock--tbd"><?php esc_html_e( 'Datum folgt', 'polinis' ); ?></p>
+			<?php endif; ?>
+			<a class="btn btn--primary drop__cta" href="#signal"><?php esc_html_e( 'Erinnere mich', 'polinis' ); ?></a>
+		</div>
+	</section>
+	<?php endif; ?>
+
 	<section class="rail" aria-labelledby="rail-title">
 		<?php foreach ( $polinis_tracks as $polinis_state => $polinis_track ) : ?>
 			<div class="rail__set" data-when="<?php echo esc_attr( $polinis_state ); ?>">

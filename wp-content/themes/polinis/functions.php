@@ -66,6 +66,8 @@ add_action(
 			'POLINIS',
 			array(
 				'storageKey' => 'polinis-signal',
+				'wcAjax'     => class_exists( 'WC_AJAX' ) ? WC_AJAX::get_endpoint( '%%endpoint%%' ) : '',
+				'cartUrl'    => function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '',
 				'labels'     => array(
 					'on'  => __( 'Signal an: S-02 Light Series', 'polinis' ),
 					'off' => __( 'Signal aus: S-01 No Signal', 'polinis' ),
