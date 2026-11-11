@@ -224,7 +224,7 @@
 
 	function bindVariationImage(form) {
 		var img = document.querySelector('.pdp-gallery .wp-post-image');
-		if (!img || !window.jQuery) {
+		if (!img) {
 			return;
 		}
 		var original = { src: img.getAttribute('src'), srcset: img.getAttribute('srcset') || '', alt: img.alt };
@@ -264,15 +264,17 @@
 			}
 		}
 
-		window.jQuery(form)
-			.on('found_variation', function (e, variation) {
-				if (variation && variation.image && variation.image.src) {
-					show(variation.image.src, variation.image.srcset, variation.image.alt);
-				}
-			})
-			.on('reset_image', function () {
-				window.setTimeout(showForColor, 0);
-			});
+		if (window.jQuery) {
+			window.jQuery(form)
+				.on('found_variation', function (e, variation) {
+					if (variation && variation.image && variation.image.src) {
+						show(variation.image.src, variation.image.srcset, variation.image.alt);
+					}
+				})
+				.on('reset_image', function () {
+					window.setTimeout(showForColor, 0);
+				});
+		}
 
 		if (colorSelect) {
 			colorSelect.addEventListener('change', function () {
