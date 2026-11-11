@@ -188,6 +188,19 @@ button {
 	scrollbar-width: thin;
 }
 
+.label,
+.ticker,
+.manifesto__sign,
+.switch__caption,
+.site-footer__head,
+.woocommerce div.product form.cart .variations th label {
+	font-family: var(--f-text) !important;
+	font-stretch: 125%;
+	font-weight: 700 !important;
+	letter-spacing: 0.08em !important;
+	text-transform: uppercase;
+}
+
 .mono {
 	font-family: var(--f-mono);
 	font-size: 0.75rem;
@@ -544,10 +557,7 @@ button {
 	overflow: hidden;
 	background: var(--violet);
 	color: var(--on-violet);
-	font-family: var(--f-mono);
 	font-size: 0.6875rem;
-	font-weight: 500;
-	letter-spacing: 0.1em;
 	text-transform: uppercase;
 }
 
@@ -922,15 +932,14 @@ button {
 	}
 
 	.hero__caption {
-		margin-top: 18px;
-		padding-right: 104px;
+		margin-top: 22px;
+		padding-left: 100px;
 		text-align: left;
 	}
 
 	.hero__switch {
-		left: auto;
-		right: -4px;
-		bottom: -14px;
+		left: 18px;
+		bottom: -6px;
 	}
 
 	.hero__data {
@@ -1244,12 +1253,6 @@ button {
 
 .index__title {
 	margin-bottom: var(--s-6);
-	font-size: 1rem;
-	font-weight: 700;
-	font-stretch: 112%;
-	letter-spacing: 0.06em;
-	text-transform: uppercase;
-	color: var(--ink-2);
 }
 
 .index__list {
@@ -1275,6 +1278,7 @@ button {
 }
 
 .index__name {
+	min-width: 0;
 	font-size: clamp(1.75rem, 5.2vw, 4.25rem);
 	font-weight: 850;
 	font-stretch: 125%;
@@ -1318,6 +1322,10 @@ button {
 	.index__thumb {
 		width: 56px;
 		height: 56px;
+	}
+
+	.index__name {
+		font-size: clamp(1.2rem, 6vw, 1.75rem);
 	}
 
 	.index__row .icon {
@@ -2040,6 +2048,8 @@ select,
 
 .variations .swatch-value {
 	color: var(--ink);
+	font-stretch: 100%;
+	font-weight: 500;
 	text-transform: none;
 	letter-spacing: 0;
 }
@@ -2170,9 +2180,21 @@ select,
 .woocommerce button.button.alt.disabled,
 .woocommerce button.button.alt.disabled:hover,
 .woocommerce button.button:disabled {
-	background: var(--violet);
-	color: var(--on-violet);
-	opacity: 0.45;
+	background: transparent;
+	border: 1px solid var(--line-strong);
+	color: var(--ink);
+	opacity: 1;
+	cursor: not-allowed;
+}
+
+/* Solange keine Größe gewählt ist, sagt der Button, was fehlt. */
+.woocommerce button.single_add_to_cart_button.wc-variation-selection-needed {
+	font-size: 0;
+}
+
+.woocommerce button.single_add_to_cart_button.wc-variation-selection-needed::after {
+	content: "Erst Größe wählen";
+	font-size: 0.9375rem;
 }
 
 .pdp__promises {

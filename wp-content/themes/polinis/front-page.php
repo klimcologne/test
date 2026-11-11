@@ -85,7 +85,7 @@ $polinis_cats    = array( 'hoodies' => 'Hoodies', 't-shirts' => 'T-Shirts', 'swe
 	</section>
 
 	<section class="index" aria-labelledby="index-title">
-		<h2 id="index-title" class="index__title"><?php esc_html_e( 'Was suchst du?', 'polinis' ); ?></h2>
+		<h2 id="index-title" class="index__title section-head__title"><?php esc_html_e( 'Nach Teil', 'polinis' ); ?></h2>
 		<ul class="index__list">
 			<?php
 			foreach ( $polinis_cats as $polinis_slug => $polinis_label ) :
@@ -142,10 +142,14 @@ $polinis_cats    = array( 'hoodies' => 'Hoodies', 't-shirts' => 'T-Shirts', 'swe
 
 	<section class="facts" aria-label="<?php esc_attr_e( 'Gut zu wissen', 'polinis' ); ?>">
 		<ul class="facts__list">
-			<li><?php echo polinis_icon( 'truck' ); ?><strong><?php esc_html_e( 'Versandkostenfrei', 'polinis' ); ?></strong><span><?php esc_html_e( 'auf jede Bestellung', 'polinis' ); ?></span></li>
+			<li><?php echo polinis_icon( 'truck' ); ?><strong><?php esc_html_e( 'Versandkostenfrei', 'polinis' ); ?></strong><span><?php esc_html_e( 'innerhalb Deutschlands', 'polinis' ); ?></span></li>
 			<li><?php echo polinis_icon( 'leaf' ); ?><strong><?php esc_html_e( 'Bio-Baumwolle', 'polinis' ); ?></strong><span><?php esc_html_e( 'bei vielen Tees, Hoodies und Sweats', 'polinis' ); ?></span></li>
 			<li><?php echo polinis_icon( 'ruler' ); ?><strong><?php esc_html_e( 'Unisex S bis 5XL', 'polinis' ); ?></strong><span><?php esc_html_e( 'Größentabelle an jedem Teil', 'polinis' ); ?></span></li>
-			<li><?php echo polinis_icon( 'card' ); ?><strong><?php esc_html_e( 'Sicher zahlen', 'polinis' ); ?></strong><span>PayPal · Klarna · Apple Pay</span></li>
+			<?php if ( function_exists( 'polinis_payment_labels' ) && polinis_payment_labels() ) : ?>
+				<li><?php echo polinis_icon( 'card' ); ?><strong><?php esc_html_e( 'Sicher zahlen', 'polinis' ); ?></strong><span><?php echo esc_html( implode( ' · ', polinis_payment_labels() ) ); ?></span></li>
+			<?php else : ?>
+				<li><?php echo polinis_icon( 'target' ); ?><strong><?php esc_html_e( 'Drei Linien', 'polinis' ); ?></strong><span><?php esc_html_e( 'S-01, S-02 und Essentials', 'polinis' ); ?></span></li>
+			<?php endif; ?>
 		</ul>
 	</section>
 

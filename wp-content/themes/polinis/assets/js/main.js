@@ -246,6 +246,24 @@
 			}
 		}
 
+		var colorSelect = form.querySelector('select[name="attribute_pa_farbe"]');
+		var variations = [];
+		try {
+			variations = JSON.parse(form.dataset.product_variations || '[]') || [];
+		} catch (err) {}
+
+		/* Farbe gewählt, Größe noch nicht: trotzdem die passende Farbe zeigen. */
+		function showForColor() {
+			var match = colorSelect && colorSelect.value && variations.find(function (v) {
+				return v.attributes.attribute_pa_farbe === colorSelect.value && v.image && v.image.src;
+			});
+			if (match) {
+				show(match.image.src, match.image.srcset, match.image.alt);
+			} else {
+				show(original.src, original.srcset, original.alt);
+			}
+		}
+
 		window.jQuery(form)
 			.on('found_variation', function (e, variation) {
 				if (variation && variation.image && variation.image.src) {
@@ -253,23 +271,12 @@
 				}
 			})
 			.on('reset_image', function () {
-				show(original.src, original.srcset, original.alt);
+				window.setTimeout(showForColor, 0);
 			});
 
-		/* Farbe gewählt, Größe noch nicht: schon mal die passende Farbe zeigen. */
-		var colorSelect = form.querySelector('select[name="attribute_pa_farbe"]');
-		var variations = [];
-		try {
-			variations = JSON.parse(form.dataset.product_variations || '[]') || [];
-		} catch (err) {}
-		if (colorSelect && variations.length) {
+		if (colorSelect) {
 			colorSelect.addEventListener('change', function () {
-				var match = variations.find(function (v) {
-					return v.attributes.attribute_pa_farbe === colorSelect.value && v.image && v.image.src;
-				});
-				if (match) {
-					show(match.image.src, match.image.srcset, match.image.alt);
-				}
+				window.setTimeout(showForColor, 0);
 			});
 		}
 	}

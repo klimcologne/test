@@ -34,10 +34,12 @@
 			<?php polinis_legal_nav(); ?>
 		</div>
 
+		<?php if ( function_exists( 'polinis_payment_labels' ) && polinis_payment_labels() ) : ?>
 		<div class="site-footer__col">
 			<h2 class="site-footer__head"><?php esc_html_e( 'Bezahlen', 'polinis' ); ?></h2>
-			<p class="site-footer__pay">PayPal · Klarna · Apple Pay · Google Pay · Visa · Mastercard · Amex</p>
+			<p class="site-footer__pay"><?php echo esc_html( implode( ' · ', polinis_payment_labels() ) ); ?></p>
 		</div>
+		<?php endif; ?>
 	</div>
 
 	<div class="site-footer__base">

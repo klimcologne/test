@@ -56,9 +56,11 @@ add_action( 'woocommerce_single_product_summary', 'polinis_single_promises', 35 
 function polinis_single_promises() {
 	?>
 	<ul class="pdp__promises">
-		<li><?php echo polinis_icon( 'truck' ); ?><?php esc_html_e( 'Versandkostenfrei', 'polinis' ); ?></li>
+		<li><?php echo polinis_icon( 'truck' ); ?><?php esc_html_e( 'Versandkostenfrei in Deutschland', 'polinis' ); ?></li>
 		<li><?php echo polinis_icon( 'ruler' ); ?><?php esc_html_e( 'Unisex-Schnitt, Größentabelle unten', 'polinis' ); ?></li>
-		<li><?php echo polinis_icon( 'card' ); ?><?php esc_html_e( 'PayPal, Klarna, Apple Pay, Karte', 'polinis' ); ?></li>
+		<?php if ( polinis_payment_labels() ) : ?>
+			<li><?php echo polinis_icon( 'card' ); ?><?php echo esc_html( implode( ', ', polinis_payment_labels() ) ); ?></li>
+		<?php endif; ?>
 	</ul>
 	<?php
 }
@@ -112,6 +114,34 @@ add_filter(
 		return $fragments;
 	}
 );
+
+/* ---------- Zahlarten: nur zeigen, was wirklich eingerichtet ist ---------- */
+
+function polinis_payment_labels() {
+	if ( ! function_exists( 'WC' ) || ! WC()->payment_gateways() ) {
+		return array();
+	}
+	$names = array(
+		'ppcp-gateway'        => 'PayPal',
+		'ppcp'                => 'PayPal',
+		'paypal'              => 'PayPal',
+		'klarna_payments'     => 'Klarna',
+		'kco'                 => 'Klarna',
+		'stripe'              => 'Karte',
+		'stripe_applepay'     => 'Apple Pay',
+		'stripe_googlepay'    => 'Google Pay',
+		'woocommerce_payments' => 'Karte',
+		'bacs'                => 'Überweisung',
+		'cod'                 => 'Nachnahme',
+	);
+	$labels = array();
+	foreach ( WC()->payment_gateways()->payment_gateways() as $id => $gateway ) {
+		if ( 'yes' === $gateway->enabled ) {
+			$labels[] = $names[ $id ] ?? wp_strip_all_tags( $gateway->get_title() );
+		}
+	}
+	return array_values( array_unique( $labels ) );
+}
 
 /* ---------- Helfer für Karten ---------- */
 
